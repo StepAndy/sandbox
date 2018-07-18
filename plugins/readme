@@ -1,0 +1,3 @@
+#Вбить в Bash'e в каталоге, где исходники
+
+export LD_PATH_LIBRARY=$PWD

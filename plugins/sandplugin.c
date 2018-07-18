@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-char *functionality = "printf_wrapper - am doing the same";
+char functionality[] = "1.sum\n2.diff\n";
 
-void printf_wrapper(char *output)
+int sum(int a, int b)
 {
-	printf("%s\n", output); //*output
+	return a+b; //*output
 }
 
-void scanf_wrapper(char *input)
+int difference(int a, int b)
 {
-	scanf("%s",input);
+	return a-b;
 }
 
 /*
