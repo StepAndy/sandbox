@@ -9,6 +9,7 @@
 #include <stdlib.h>
 
 #define MAX_NAME_LEN 45
+#define KEY_ENTER 10
 
 //screen window subwindow
 //stdscr curscr
@@ -50,7 +51,8 @@ int main(int argc, char const *argv[])
     wrefresh(wnd);
     mvwgetnstr(wnd, 3, 5, file_name, MAX_NAME_LEN);
     wmove(wnd, 3, 5 + sizeof(file_name));
-   
+   	curs_set(FALSE);
+
    	while(ch = getch()){
    		if(ch == KEY_F(1)){
     	//f1 open file
@@ -65,12 +67,17 @@ int main(int argc, char const *argv[])
 			break;
     }
    } 	
-
+   	curs_set(TRUE);
     move(0, 0);
-	getnstr(insert_buf, 3000);
+	//getnstr(insert_buf, 3000);
 
 	while(ch = getch()){
-	//f2 edit	
+	//f2 edit
+		if(ch == KEY_ENTER){
+			int x,y;
+			getyx(stdscr,y,x);
+			move(y+1,0);
+		}	
 		if(ch == KEY_F(2)){
 	    	scr_dump("try.txt");
     		tryfd = open("try.txt", O_RDWR); //change to file_name
