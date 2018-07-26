@@ -1,5 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 int main()
 {
@@ -20,12 +22,14 @@ int main()
 		first_pid = getpid();
 		first_to_third_forked_result = fork();
 		if(first_to_third_forked_result == 0) third_pid = getpid();	
+		else wait(0);//
 	}
 	
 	//Создаю ответвление от третьего к четвертому
 	if(getpid() == third_pid) {
 		third_to_fourth_forked_result = fork();
 		if(third_to_fourth_forked_result == 0) fourth_pid = getpid();
+		else wait(0);//
 	}
 
 	//Создаю ответвление от второго к пятому, от второго к шестому
@@ -34,7 +38,8 @@ int main()
 		if(second_to_fifth_forked_result == 0) fifth_pid = getpid();
 		else {
 			second_to_sixth_forked_result = fork();
-			if (second_to_sixth_forked_result == 0) sixth_pid = getpid();	
+			if (second_to_sixth_forked_result == 0) sixth_pid = getpid();
+			else wait(0);	//
 		}
 	}
 

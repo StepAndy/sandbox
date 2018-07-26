@@ -43,15 +43,27 @@ int main(int argc, char const *argv[])
     start_color();
     init_pair(1, COLOR_YELLOW, COLOR_BLUE);
   	
-  	wnd = newwin(5, 35, 10, 15);
-    wbkgd(wnd, COLOR_PAIR(1));
-    box(wnd, '|', '-');
-    mvwprintw(wnd, 0, 2, "[F1]-open|[F2]-save|[F3]-close");
-    mvwprintw(wnd, 2, 2, "Please, enter the name of file:");
-    wrefresh(wnd);
-    mvwgetnstr(wnd, 3, 5, file_name, MAX_NAME_LEN);
-    wmove(wnd, 3, 5 + sizeof(file_name));
-   	curs_set(FALSE);
+    if(argc>1){
+		fd = open(argv[1],O_RDWR);
+		if(fd == -1) perror("descriptor");
+		if(!read(fd, file_buf, 1500)) perror("read");
+		delwin(wnd);
+		clear();
+		wnd = newwin(80, 80, 1, 1);
+		printw("%s\n", file_buf);
+		refresh();
+   	}
+  	else{
+   		wnd = newwin(5, 35, 10, 15);
+    	wbkgd(wnd, COLOR_PAIR(1));
+    	box(wnd, '|', '-');
+    	mvwprintw(wnd, 0, 2, "[F1]-open|[F2]-save|[F3]-close");
+    	mvwprintw(wnd, 2, 2, "Please, enter the name of file:");
+    	wrefresh(wnd);
+    	mvwgetnstr(wnd, 3, 5, file_name, MAX_NAME_LEN);
+   		wmove(wnd, 3, 5 + sizeof(file_name));
+   		curs_set(FALSE);
+  	}
 
    	while(ch = getch()){
    		if(ch == KEY_F(1)){
