@@ -17,7 +17,7 @@ struct client_info{
 } my_info;
 
 struct client_dispatcher{
-	long type; // do not use, only in case of I needed field with type long
+	long type; 
 	long dispatch_port;
 } get_my;
 
