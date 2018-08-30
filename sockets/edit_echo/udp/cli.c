@@ -9,6 +9,7 @@ int main(int argc, char const *argv[])
 {
 	int sockfd;
 	int connected;
+	int closed;
 	socklen_t sizeof_server;
 
 	struct sockaddr_in server, client;
@@ -27,9 +28,17 @@ int main(int argc, char const *argv[])
 	}
 	char buf[50] = "hello";
 	size_t sizeof_buf = sizeof(buf);
-	send(sockfd, buf, sizeof_buf, 0);
-	recv(sockfd, buf, sizeof_buf, 0);
+	if(send(sockfd, buf, sizeof_buf, 0) < 0){
+		perror("send");
+	}
+	if(recv(sockfd, buf, sizeof_buf, 0) < 0){
+		perror("recv");
+	}
 	printf("received [%s]\n", buf);
-	close(sockfd);
+
+	closed = close(sockfd);
+	if (close < 0){
+		perror("close");
+	}
 	return 0;
 }

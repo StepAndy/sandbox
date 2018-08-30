@@ -9,6 +9,7 @@ int main(int argc, char const *argv[])
 {
 	int sockfd;
 	int binded;
+	int closed;
 	socklen_t sizeof_server;
 
 	struct sockaddr_in server, client;
@@ -40,6 +41,9 @@ int main(int argc, char const *argv[])
 		perror("send");
 	}
 	
-	close(sockfd);
+	closed = close(sockfd);
+	if (close < 0){
+		perror("close");
+	}
 	return 0;
 }
