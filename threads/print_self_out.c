@@ -8,9 +8,6 @@ pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 void *func()
 {	
 	pthread_mutex_lock(&mut);
-	/*int tmp = ind;
-	tmp++;
-	ind = tmp;*/
 	ind++;
 	printf("I was called %d, My tid is %ld \n", ind, pthread_self());
 	pthread_mutex_unlock(&mut);

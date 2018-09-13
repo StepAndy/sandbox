@@ -90,21 +90,3 @@ int main(int argc, char const *argv[])
 	exit(0);
 	return 0;
 }
-
-/*
-	//Если это не бред, то придется залочить и разлочить
-	while(1){
-		if(indexed_consummer[0] == 0){
-			indexed_consummer[0] = pthread_self();	
-			break;
-		} 
-		if(indexed_consummer[1] == 1){
-			indexed_consummer[1] = pthread_self();
-			break;
-		} 
-		if(indexed_consummer[2] == 2){
-			indexed_consummer[2] = pthread_self();
-			break;	
-		} 
-	}
-*/
